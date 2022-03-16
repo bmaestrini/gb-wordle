@@ -15,6 +15,9 @@
 #include "keyboard.h"
 #include "board.h"
 
+#include "sound.h"
+#include "audio_common.h"
+
 char empty_word_buf[WORD_LENGTH + 1] = "     ";
 
 uint8_t g_board_tile_flip_speed;
@@ -182,6 +185,7 @@ void board_add_guess_letter(void) {
     uint8_t guess_len = strlen(guess);
 
     if (guess_len < WORD_LENGTH) {
+        PLAY_SOUND_SQUEEK;
         guess[guess_len] = keyboard_get_letter();
         board_render_guess_letter(guess_len);
     }
@@ -194,6 +198,7 @@ void board_remove_guess_letter(void) {
     uint8_t guess_len = strlen(guess);
 
     if (guess_len > 0) {
+        PLAY_SOUND_SQUEEK;
         guess[guess_len-1] = GUESS_LETTER_EMPTY;
         board_render_guess_letter(guess_len-1);
     }
@@ -266,6 +271,9 @@ void board_draw_letter(uint8_t row, uint8_t col, uint8_t letter, bool do_highlig
     else if (letter >= 'A')
         letter -= 'A';
 
+    // if ((g_board_tile_flip_speed) && (do_highlight) && (letter != BOARD_LETTERS_SPACE_CHAR))
+    //     PLAY_SOUND_TILE_CLEAR_NORMAL; // PLAY_SOUND_TILE_CLEAR_BONUS
+
     // Only color highlighting when not doing guess entry
     board_set_color_for_letter(row, col, do_highlight);
 
@@ -278,6 +286,7 @@ void board_draw_letter(uint8_t row, uint8_t col, uint8_t letter, bool do_highlig
 // Render a word at * p_guess onto the board
 void board_draw_word(uint8_t row, uint8_t * p_guess, bool do_highlight) {
 
+    bool soundfx_on = (p_guess != NULL);
     // If it's a request to draw an empty word, use a shim empty string
     if (p_guess == NULL) {
         p_guess = empty_word_buf;
@@ -292,6 +301,10 @@ void board_draw_word(uint8_t row, uint8_t * p_guess, bool do_highlight) {
     // col maps to the individual letters in the word/guess
     for (uint8_t col = 0; col < BOARD_GRID_W; col ++) {
 
+        // TODO: handle when board flip speed is set to none
+        if (soundfx_on) PLAY_SOUND_PIECE_ROTATE;
+        // if (soundfx_on) PLAY_SOUND_TILE_CLEAR_NORMAL;
+        // if (soundfx_on)  PLAY_SOUND_TILE_CLEAR_BONUS;
         board_draw_letter(row, col, p_guess[col], do_highlight);
     }
 }

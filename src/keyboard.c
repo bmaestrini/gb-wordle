@@ -11,6 +11,9 @@
 
 #include "keyboard.h"
 
+#include "sound.h"
+#include "audio_common.h"
+
 // Keyboard map
 const char *kb[KEYBD_ROWS] = {
 "QWERTYUIOP",
@@ -247,6 +250,7 @@ void keyboard_move_cursor(int8_t move_x, int8_t move_y) {
     else if (kb_x < 0)
         kb_x = kb_coords[kb_y] - 1;
 
-
+    // Sounds for every cursor move is a bit much
+    // PLAY_SOUND_PRINT_CHAR;
     keyboard_update_cursor();
 }

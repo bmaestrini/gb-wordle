@@ -25,6 +25,8 @@
 #include "gameplay.h"
 #include "stats.h"
 
+#include "sound.h"
+
 bool is_first_run = true;
 
 fixed rand_seed = {.w = 0x0000u};
@@ -36,6 +38,7 @@ void main() {
     SHOW_WIN;
     SHOW_BKG;
     SHOW_SPRITES;
+    init_sound();
 
     cgb_check_and_init();
     gfx_load();

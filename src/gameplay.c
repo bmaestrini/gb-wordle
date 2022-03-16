@@ -21,6 +21,9 @@
 #include "window.h"
 #include "stats.h"
 
+#include "sound.h"
+#include "audio_common.h"
+
 #include "gameplay.h"
 #include <lang_text.h>
 
@@ -83,6 +86,7 @@ void show_options_message(void) {
 
 void gameplay_handle_lose(void) {
     // Hide cursor so it doesn't flash between popups
+    PLAY_SOUND_GAME_OVER;
     board_hide_cursor();
     show_lose_message(word);
     stats_update(GAME_NOT_WON, guess_num);
@@ -123,13 +127,13 @@ void gameplay_handle_guess(void) {
 
         if (game_was_won) {
             // Hide cursor so it doesn't flash between popups
+            PLAY_SOUND_LEVEL_UP;
             board_hide_cursor();
             show_win_message(guess_num);
             stats_update(GAME_WAS_WON, guess_num);
             GAMEPLAY_SET_GAMEOVER;
         }
         else if (guess_num == MAX_GUESSES) {
-            // sets: GAMEPLAY_SET_GAMEOVER;
             gameplay_handle_lose();
         } else {
             board_update_cursor();
