@@ -37,7 +37,6 @@ void main() {
     fade_out();
     SHOW_WIN;
     SHOW_BKG;
-    SHOW_SPRITES;
     init_sound();
 
     cgb_check_and_init();
@@ -64,9 +63,12 @@ void main() {
                 if (is_first_run) {
                     show_intro_message();
                     is_first_run = false;
-                    // Second half of random init (button press to exit welcome dialog)
+                    // Second half of random init (after button press to exit welcome dialog)
                     rand_seed.l = DIV_REG;
                     initrand(rand_seed.w);
+
+                    // Wait to turn on all sprites until after first popup intro message
+                    SHOW_SPRITES;
                 }
                 gameplay_init_answer_word();
                 game_state = GAME_STATE_RUNNING;

@@ -25,14 +25,14 @@ uint8_t kb_status[KEYBD_ROWS][10];
 
 
 // Length of each keyboard row in characters
-int8_t kb_coords[KEYBD_ROWS] = {
+const int8_t kb_row_len[KEYBD_ROWS] = {
     10,
     9,
     7
 };
 
 // Which tile column each keyboard row starts on
-int8_t kb_offsets[KEYBD_ROWS] = {
+const int8_t kb_offsets[KEYBD_ROWS] = {
     0,
     1,
     2
@@ -140,7 +140,7 @@ void keyboard_update_from_guess(void) {
     // Loop through keyboard, check for letters to highlight
     for(uint8_t row = 0; row < 3; row++) {
 
-        uint8_t kbl = strlen(kb[row]);
+        uint8_t kbl = kb_row_len[row];
         for(uint8_t col=0; col < kbl; col++) {
 
             char letter = kb[row][col];
@@ -171,7 +171,7 @@ void keyboard_redraw_clean(void) {
     uint8_t tile_id = BG_TILES_KEYBD_START;
     for(uint8_t row = 0; row < 3; row++) {
 
-        uint8_t kbl = strlen(kb[row]);
+        uint8_t kbl = kb_row_len[row];
         for(uint8_t col=0; col < kbl; col++) {
 
             // Reset keyboard status
@@ -191,7 +191,7 @@ void keyboard_draw_map(void) {
     uint8_t tile_id = BG_TILES_KEYBD_START;
 
     for(uint8_t row = 0; row < 3; row++) {
-        uint8_t kbl = strlen(kb[row]);
+        uint8_t kbl = kb_row_len[row];
 
         // Add a blank space between every horizontal letter
         for(uint8_t col=0; col < kbl * 2; col += 2) {
@@ -222,7 +222,27 @@ void keyboard_update_cursor(void) {
 }
 
 
-void keyboard_move_cursor(int8_t move_x, int8_t move_y) {
+
+const int8_t keyboard_dpad_movement[] = {
+    1,  0, // J_RIGHT 0x01
+   -1,  0, // J_LEFT  0x02
+    0, -1, // J_UP    0x04
+    0,  0, // shim for gap
+    0,  1, // J_DOWN  0x08
+};
+
+void keyboard_move_cursor(uint8_t dpad_key) {
+
+    // Using this LUT saves about 50 bytes versus a switch()
+    // in main loop and passing x,y dirs
+    //
+    // LUT is 2 entries per key
+    // Mask lowest dpad bit (J_RIGHT) to get
+    // So this: 1 2 4 8 -> becomes -> 0 2 4 ~6~ 8
+    // Then just use a single shim entry for missing 6 slot
+    dpad_key &= 0xFEu;
+    int8_t move_x = keyboard_dpad_movement[dpad_key++];
+    int8_t move_y = keyboard_dpad_movement[dpad_key];
 
     // Update Y first (may change X) and handle wraparound
     if (move_y != 0) {
@@ -236,8 +256,8 @@ void keyboard_move_cursor(int8_t move_x, int8_t move_y) {
         }
 
         // Bump X to end or row if it's shorter X if needed on row change
-        if(kb_x >= kb_coords[kb_y]) {
-            kb_x = kb_coords[kb_y] - 1;
+        if(kb_x >= kb_row_len[kb_y]) {
+            kb_x = kb_row_len[kb_y] - 1;
         }
     }
 
@@ -245,10 +265,10 @@ void keyboard_move_cursor(int8_t move_x, int8_t move_y) {
     // Update X and handle wraparound
     kb_x += move_x;
 
-    if (kb_x >= kb_coords[kb_y])
+    if (kb_x >= kb_row_len[kb_y])
         kb_x = 0;
     else if (kb_x < 0)
-        kb_x = kb_coords[kb_y] - 1;
+        kb_x = kb_row_len[kb_y] - 1;
 
     // Sounds for every cursor move is a bit much
     // PLAY_SOUND_PRINT_CHAR;

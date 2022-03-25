@@ -7,7 +7,7 @@
 
 #ifndef LANG_IS_EN
 
-    #define INTRO_DIALOG_WIN_Y DIALOG_TEXT_HEIGHT_LINES(9)
+    #define INTRO_DIALOG_WIN_Y DIALOG_TEXT_HEIGHT_LINES(16)
     #define __INTRO_MESSAGE_STR \
     /*  |------------------| Available space (18 chars wide) */\
         "WELCOME TO WORDYL \n" \
@@ -16,40 +16,97 @@
         "  A..Z  ONLY\n" \
         "  NO SPECIAL CHARS\n" \
         "\n" \
-        "IN GAME MENU . SEL\n" \
+        "IN GAME MENU:\n" \
+        "  3 x SELECT\n" \
         "\n" \
-        "ANY KEY TO START"
+        "BOARD CURSOR:\n" \
+        "  SELECT + B A\n" \
+        "\n" \
+        "AUTO FILL:\n" \
+        "  SELECT + START\n" \
+        "\n" \
+        "ANY KEY TO BEGIN"
 
 #else
 
-    #define INTRO_DIALOG_WIN_Y DIALOG_TEXT_HEIGHT_LINES(7)
+    #define INTRO_DIALOG_WIN_Y DIALOG_TEXT_HEIGHT_LINES(14)
     #define __INTRO_MESSAGE_STR \
     /*  |------------------| Available space (18 chars wide) */\
         "WELCOME TO WORDYL \n" \
         "\n" \
         "LANGUAGE ...... " STR(LANG_CODE) "\n" \
         "\n" \
-        "IN GAME MENU . SEL\n" \
+        "IN GAME MENU:\n" \
+        "  3 x SELECT\n" \
         "\n" \
-        "ANY KEY TO START"
+        "BOARD CURSOR:\n" \
+        "  SELECT + B A\n" \
+        "\n" \
+        "AUTO FILL:\n" \
+        "  SELECT + START\n" \
+        "\n" \
+        "ANY KEY TO BEGIN"
 
 #endif
 
 
-#define OPTIONS_MENU_DIALOG_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(8)
+#define OPTIONS_MENU_DIALOG_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(10)
 #define __OPTIONS_MENU_STR \
 /*  |------------------| Available space (18 chars wide) */\
     "OPTIONS\n" \
     "\n" \
-    "SHOW STATS ....  B\n" \
+    "SHOW STATS ....  A\n" \
+    "HARD MODE .....  >\n" \
+    "AUTO FILL .....  /\n" \
     "\n" \
-    "RESET STATS ...  >\n" \
     "FORFEIT ROUND .  ^\n" \
+    "RESET STATS ...  <\n" \
     "\n" \
     "EXIT MENU .... ANY"
 
 
-// Avoid incerasing this popup height so it doesn't obscure the board
+#define CONFIRM_DIALOG_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(6)
+#define __CONFIRM_DIALOG_STR \
+/*  |------------------| Available space (18 chars wide) */ \
+    "CONFIRM:^\n" \
+    "CANCEL: OTHER KEYS\n"\
+    "..................\n" \
+    "\n" \
+
+#define __CONFIRM_FORFEIT_STR     "FORFEIT ROUND?"
+
+#define __CONFIRM_STATS_RESET_STR "RESET STATS?"
+
+#define AUTOFILL_INFO_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(3)
+#define __AUTOFILL_ON__STR "AUTO FILL: ON"
+#define __AUTOFILL_OFF__STR "AUTO FILL: OFF"
+
+
+// Display hard mdoe indicator just above keyboard on right
+#define OPT_HARDMODE_DISPLAY_X 15
+#define OPT_HARDMODE_DISPLAY_Y 12
+#define __STR_HARD_MODE_DISPLAY "HARD" // 5 chars max (padded leading space intentional)
+#define __STR_HARD_MODE_HIDE    "    "
+
+
+#define HARD_MODE_CANT_CHANGE_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(3)
+#define __MESSAGE_HARD_MODE_CANT_CHANGE_STR \
+/*  |------------------| Available space (18 chars wide) */\
+    "HARD MODE: CAN\n" \
+    "ONLY CHANGE AT\n" \
+    "START OF ROUND"
+
+
+// Avoid increasing this popup height so it doesn't obscure the board
+#define HARD_MODE_GUESS_NOT_VALID_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(3)
+#define __MESSAGE_HARD_MODE_GUESS_NOT_VALID_STR \
+/*  |------------------| Available space (18 chars wide) */\
+    "HARD MODE: GUESS\n" \
+    "MUST HAVE ALL\n" \
+    "REVEALED CLUES"
+
+
+// Avoid increasing this popup height so it doesn't obscure the board
 #define LOSE_MESSAGE_DIALOG_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(3)
 #define __MESSAGE_LOSE_STR \
 /*  |------------------| Available space (18 chars wide) */\
@@ -60,7 +117,7 @@
 
 // NOTE! X gets replaced with guess 5 letter word num
 //
-// Avoid incerasing this popup height so it doesn't obscure the board
+// Avoid increasing this popup height so it doesn't obscure the board
 #define WON_MESSAGE_DIALOG_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(3)
 #define __MESSAGE_GAME_WON_STR \
 /*  |------------------| Available space (18 chars wide) */\
@@ -69,7 +126,7 @@
     "On Guess ^ of 6"
 
 
-// Avoid incerasing this popup height so it doesn't obscure the board
+// Avoid increasing this popup height so it doesn't obscure the board
 #define WORD_TOO_SHORT_DIALOG_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(3)
 #define __MESSAGE_WORD_TOO_SHORT_STR \
 /*  |------------------| Available space (18 chars wide) */\
@@ -78,7 +135,7 @@
     "Needs 5 Letters"
 
 
-// Avoid incerasing this popup height so it doesn't obscure the board
+// Avoid increasing this popup height so it doesn't obscure the board
 #define WORD_NOT_IN_DICT_DIALOG_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(3)
 #define __MESSAGE_WORD_NOT_IN_DICT_STR \
 /*  |------------------| Available space (18 chars wide) */\

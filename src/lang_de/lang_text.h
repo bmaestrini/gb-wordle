@@ -12,7 +12,7 @@
 // German (edit+fix by skite2001 ^_-)
 
 #undef INTRO_DIALOG_WIN_Y
-#define INTRO_DIALOG_WIN_Y DIALOG_TEXT_HEIGHT_LINES(10)
+#define INTRO_DIALOG_WIN_Y DIALOG_TEXT_HEIGHT_LINES(16)
 #undef __INTRO_MESSAGE_STR
 #define __INTRO_MESSAGE_STR \
 /*  |------------------| Available space (18 chars wide) */\
@@ -23,7 +23,13 @@
     "  NUR A..Z OHNE\n" \
     "  SONDERZEICHEN\n" \
     "\n" \
-    "OPTIONEN:   SELECT\n" \
+    "OPTIONEN:3x SELECT\n" \
+    "\n" \
+    "STELLENAUSWAHL:\n" \
+    "  SELECT + B A\n" \
+    "\n" \
+    "AUTOEINGABE:\n" \
+    "  SELECT + START\n" \
     "\n" \
     "TASTE DRUECKEN"
 
@@ -33,12 +39,61 @@
 /*  |------------------| Available space (18 chars wide) */\
     "OPTIONEN\n" \
     "\n" \
-    "ZEIGE STATS:     B\n" \
+    "ZEIGE STATS:     A\n" \
+    "PROFI MODUS:     >\n" \
+    "AUTOEINGABE:     /\n" \
     "\n" \
-    "STATS ERNEUERN:  >\n" \
     "RUNDE AUFGEBEN:  ^\n" \
+    "STATS ERNEUERN:  <\n" \
     "\n" \
     "TASTE DRUECKEN"
+
+
+#define CONFIRM_DIALOG_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(6)
+#undef __CONFIRM_DIALOG_STR
+#define __CONFIRM_DIALOG_STR \
+/*  |------------------| Available space (18 chars wide) */ \
+    "WEITER:^\n" \
+    "STOP: ANDERE TASTE\n"\
+    "..................\n" \
+    "\n" \
+
+#undef __CONFIRM_FORFEIT_STR
+#define __CONFIRM_FORFEIT_STR     "RUNDE AUFGEBEN?"
+
+#undef __CONFIRM_STATS_RESET_STR
+#define __CONFIRM_STATS_RESET_STR "STATS ERNEUERN?"
+
+#undef __AUTOFILL_ON__STR
+#undef __AUTOFILL_OFF__STR
+#define __AUTOFILL_ON__STR "AUTOEINGABE: AN"
+#define __AUTOFILL_OFF__STR "AUTOEINGABE: AUS"
+
+
+// Display hard mode indicator just above keyboard on right
+#undef OPT_HARDMODE_DISPLAY_X
+#define OPT_HARDMODE_DISPLAY_X 14
+#undef __STR_HARD_MODE_DISPLAY
+#undef __STR_HARD_MODE_HIDE
+#define __STR_HARD_MODE_DISPLAY "PROFI" // 5 chars max at this location
+#define __STR_HARD_MODE_HIDE    "     "
+
+
+#undef __MESSAGE_HARD_MODE_CANT_CHANGE_STR
+#define __MESSAGE_HARD_MODE_CANT_CHANGE_STR \
+/*  |------------------| Available space (18 chars wide) */\
+    "PROFI MODUS: NUR\n" \
+    "BEI NEUER RUNDE\n" \
+    "WECHSELBAR"
+
+
+#undef __MESSAGE_HARD_MODE_GUESS_NOT_VALID_STR
+#define __MESSAGE_HARD_MODE_GUESS_NOT_VALID_STR \
+/*  |------------------| Available space (18 chars wide) */\
+    "PROFI MODUS:\n" \
+    "RICHTIGE HINWEISE\n" \
+    "SIND BINDEND!"
+
 
 
 #undef __MESSAGE_LOSE_STR
@@ -48,9 +103,10 @@
     "\n" \
     "ANTWORT IST: "    // <-- Needs 5 chars left for answer word
 
-// NOTE! X gets replaced with guess 5 letter word num
+
+// NOTE! ^ gets replaced with guess 5 letter word num
 //
-// Intentionally not const! X gets replaced with guess num
+// Intentionally not const! ^ gets replaced with guess num
 #undef __MESSAGE_GAME_WON_STR
 #define __MESSAGE_GAME_WON_STR \
 /*  |------------------| Available space (18 chars wide) */\

@@ -26,20 +26,18 @@ extern uint8_t map_decomp_buf[];
 extern uint8_t board_letters_decomp_buf[];
 extern uint8_t font_letters_decomp_buf[];
 
-// Optimized out
-// extern const uint8_t sp_cursor_kbd_props[];
-// extern const uint8_t sp_cursor_offset_x[];
-// extern const uint8_t sp_cursor_offset_y[];
-
 
 extern const uint8_t tile_blank[];
 
 void print_gotoxy(uint8_t x, uint8_t y, uint8_t target);
 void print_str(char * txt);
 
+void opt_hardmode_display(void);
+
 void draw_letter_to_tileid(uint8_t letter, uint8_t index);
 
 void gfx_load(void);
+
 
 
 // Hardware correction factor for X position of Window when displayed on screen
@@ -47,17 +45,28 @@ void gfx_load(void);
 
 
 #define SP_TILES_CURSOR_START               0u
+    // Keyboard current letter cursor
     #define SP_TILES_CURSOR_KBD_START       (SP_TILES_CURSOR_START)
     #define SP_TILES_CURSOR_KBD_LEN         1u
+
+    // Board row cursor
     #define SP_TILES_CURSOR_BOARD_START     (SP_TILES_CURSOR_KBD_START + SP_TILES_CURSOR_KBD_LEN)
     #define SP_TILES_CURSOR_BOARD_LEN       4u
-#define SP_TILES_CURSOR_COUNT_TOTAL          (SP_TILES_CURSOR_KBD_LEN + SP_TILES_CURSOR_BOARD_LEN)
+
+    // Cursor that makes a border around the current letter tile
+    #define SP_TILES_CURSOR_LETTER_START    (SP_TILES_CURSOR_BOARD_START + SP_TILES_CURSOR_BOARD_LEN)
+    #define SP_TILES_CURSOR_LETTER_LEN      2u
+#define SP_TILES_CURSOR_COUNT_TOTAL         (SP_TILES_CURSOR_KBD_LEN + SP_TILES_CURSOR_BOARD_LEN + SP_TILES_CURSOR_LETTER_LEN)
 
 
-#define SP_ID_CURSOR_KBD_START   0u
-#define SP_ID_CURSOR_KBD_LEN     4u
-#define SP_ID_CURSOR_BOARD_START (SP_ID_CURSOR_KBD_START + SP_ID_CURSOR_KBD_LEN)
-#define SP_ID_CURSOR_BOARD_LEN   4u
+#define SP_ID_CURSORS_START            0u
+    #define SP_ID_CURSOR_KBD_START     0u
+    #define SP_ID_CURSOR_KBD_LEN       4u
+    #define SP_ID_CURSOR_BOARD_START   (SP_ID_CURSOR_KBD_START + SP_ID_CURSOR_KBD_LEN)
+    #define SP_ID_CURSOR_BOARD_LEN     4u
+    #define SP_ID_CURSOR_LETTER_START  (SP_ID_CURSOR_BOARD_START + SP_ID_CURSOR_BOARD_LEN)
+    #define SP_ID_CURSOR_LETTER_LEN    4u
+#define SP_ID_CURSORS_COUNT_TOTAL      (SP_ID_CURSOR_KBD_LEN + SP_ID_CURSOR_BOARD_LEN + SP_ID_CURSOR_LETTER_LEN)
 
 
 // TODO: could move to keybaord.h
@@ -80,7 +89,7 @@ void gfx_load(void);
 #define BOARD_LETTERS_FLIP_4     (BOARD_LETTERS_FLIP_3 + 1)
 
 
-#define FONT_LETTERS_COUNT           29u // 26 letters + 3 special chars: ".", "!", ":"
+#define FONT_LETTERS_COUNT           (26u + 4u) // 26 letters + 3 special chars: ".", "!", ":", "+"
 #define FONT_LETTERS_BYTES_PER_TILE   8u // 1bpp tiles = 8 bytes per 8x8 tile
 
 #define BOARD_GRID_X  4u // Start x,y in Tiles
@@ -114,18 +123,20 @@ void gfx_load(void);
 
 
 #define BG_TILES_FONT_START   (BG_TILES_INTRO_DIALOG_START + BG_TILES_INTRO_DIALOG_LEN)
-#define BG_TILES_FONT_LEN     (26u + 3u + 4u) // 26 letters + 3 special chars: ".", "!", ":" + 4 button chars
+#define BG_TILES_FONT_LEN     (26u + 5u + 4u) // 26 letters + 5 special chars: ".!?:+" + 4 button chars
 #define BG_TILES_FONT_PERIOD  (BG_TILES_FONT_START + 26u)
 #define BG_TILES_FONT_EXCLAIM (BG_TILES_FONT_START + 27u)
-#define BG_TILES_FONT_COLON   (BG_TILES_FONT_START + 28u)
+#define BG_TILES_FONT_QMARK   (BG_TILES_FONT_START + 28u)
+#define BG_TILES_FONT_COLON   (BG_TILES_FONT_START + 29u)
+#define BG_TILES_FONT_PLUS    (BG_TILES_FONT_START + 30u)
 
 // Gamepad Buttons
 // #define BG_TILES_FONT_BUTTON_A (BG_TILES_FONT_START + 29u)
 // #define BG_TILES_FONT_BUTTON_B (BG_TILES_FONT_START + 30u)
-#define BG_TILES_FONT_BUTTON_U (BG_TILES_FONT_START + 29u) // '^' char
-#define BG_TILES_FONT_BUTTON_D (BG_TILES_FONT_START + 30u) // '/' char
-#define BG_TILES_FONT_BUTTON_L (BG_TILES_FONT_START + 31u) // '<' char
-#define BG_TILES_FONT_BUTTON_R (BG_TILES_FONT_START + 32u) // '>' char
+#define BG_TILES_FONT_BUTTON_U (BG_TILES_FONT_START + 31u) // '^' char
+#define BG_TILES_FONT_BUTTON_D (BG_TILES_FONT_START + 32u) // '/' char
+#define BG_TILES_FONT_BUTTON_L (BG_TILES_FONT_START + 33u) // '<' char
+#define BG_TILES_FONT_BUTTON_R (BG_TILES_FONT_START + 34u) // '>' char
 
 
 #define BG_TILES_FONT_NUM_START   (BG_TILES_FONT_START + BG_TILES_FONT_LEN)
@@ -184,13 +195,10 @@ void gfx_load(void);
 #define BOARD_DMG_COLOR_CONTAINS     DMG_WHITE,     DMG_DARK_GRAY
 #define BOARD_DMG_COLOR_MATCHED      DMG_BLACK,     DMG_WHITE
 
-#define BOARD_CGB_COLOR_NOT_IN_WORD  DMG_LITE_GRAY, DMG_WHITE
     // Board
     #define SET_BOARD_COLOR_NORMAL       set_1bpp_colors(BOARD_DMG_COLOR_NORMAL)
     #define SET_BOARD_COLOR_CONTAINS     set_1bpp_colors(BOARD_DMG_COLOR_CONTAINS)
     #define SET_BOARD_COLOR_MATCHED      set_1bpp_colors(BOARD_DMG_COLOR_MATCHED)
-
-    #define SET_BOARD_CGB_COLOR_NOT_IN_WORD  set_1bpp_colors(BOARD_CGB_COLOR_NOT_IN_WORD)
 
 // Keyboard
 #define KEYBD_COLOR_NORMAL       DMG_BLACK, DMG_WHITE

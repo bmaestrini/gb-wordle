@@ -68,17 +68,41 @@ void show_options_message(void) {
 
     ret_keys_ticked = win_dialog_show_message(OPTIONS_MENU_DIALOG_WIN_Y, __OPTIONS_MENU_STR, NULL);
     switch (ret_keys_ticked) {
-        case J_RIGHT:
-            stats_reset();
-            win_dialog_show_message(STATS_RESET_DIALOG_WIN_Y, __MESSAGE_STATS_RESET_STR ,NULL);
-            // Fall through to show stats
-        case J_B:
+        case J_LEFT:
+            // Reset Stats
+            if (win_confirm_dialog(__CONFIRM_STATS_RESET_STR)) {
+                stats_reset();
+                win_dialog_show_message(STATS_RESET_DIALOG_WIN_Y, __MESSAGE_STATS_RESET_STR ,NULL);
+            }
+            break;
+
+        case J_A:
             stats_show();
             break;
 
+        case J_RIGHT:
+            // Hard mode toggle
+            if (guess_num > 0)
+                win_dialog_show_message(HARD_MODE_CANT_CHANGE_WIN_Y, __MESSAGE_HARD_MODE_CANT_CHANGE_STR, NULL);
+            else {
+                opt_hard_mode_enabled ^= 1u; // invert value
+                opt_hardmode_display();
+            }
+            break;
+
+        case J_DOWN:
+            // Auto-fill toggle
+            opt_autofill_enabled ^= 1u; // invert value
+            // Going to try and get away with not using this notice for now
+            win_dialog_show_message(AUTOFILL_INFO_WIN_Y,
+                                    (opt_autofill_enabled ? __AUTOFILL_ON__STR : __AUTOFILL_OFF__STR), NULL);
+            break;
+
         case J_UP:
+            // Forfeit Round
             // sets: GAMEPLAY_SET_GAMEOVER
-            gameplay_handle_lose();
+            if (win_confirm_dialog(__CONFIRM_FORFEIT_STR))
+                gameplay_handle_lose();
             break;
     }
 }
@@ -87,7 +111,8 @@ void show_options_message(void) {
 void gameplay_handle_lose(void) {
     // Hide cursor so it doesn't flash between popups
     PLAY_SOUND_GAME_OVER;
-    board_hide_cursor();
+    board_hide_row_cursor();
+    board_hide_letter_cursor();
     show_lose_message(word);
     stats_update(GAME_NOT_WON, guess_num);
     GAMEPLAY_SET_GAMEOVER;
@@ -101,9 +126,7 @@ void gameplay_handle_lose(void) {
 //   from the main gameplay loop
 void gameplay_handle_guess(void) {
 
-    // TODO: special handling for word_len = 0 -> don't send popup?
     if (strlen(guess) != WORD_LENGTH) {
-
         // Insufficient length
         win_dialog_show_message(WORD_TOO_SHORT_DIALOG_WIN_Y, __MESSAGE_WORD_TOO_SHORT_STR, NULL);
     }
@@ -111,36 +134,56 @@ void gameplay_handle_guess(void) {
 
         // Word not in dictionary
         win_dialog_show_message(WORD_NOT_IN_DICT_DIALOG_WIN_Y, __MESSAGE_WORD_NOT_IN_DICT_STR, NULL);
-    } else {
+    }
+    else {
 
-        // Otherwise process the guess word
-
-        board_draw_word(guess_num, guess, BOARD_HIGHLIGHT_YES);
-        guess_num += 1;
-        keyboard_update_from_guess();
-        // keyboard_update_cursor();
-
-        // == Handle Game Over scenarios ==
-
-        // Check for correct match
-        bool game_was_won = (strcmp(word, guess) == 0);
-
-        if (game_was_won) {
-            // Hide cursor so it doesn't flash between popups
-            PLAY_SOUND_LEVEL_UP;
-            board_hide_cursor();
-            show_win_message(guess_num);
-            stats_update(GAME_WAS_WON, guess_num);
-            GAMEPLAY_SET_GAMEOVER;
+        // Validate hard mode
+        if ((opt_hard_mode_enabled) && (guess_num > 0) && (evaluate_guess_hard_mode(guess) == false)) {
+            win_dialog_show_message(HARD_MODE_GUESS_NOT_VALID_WIN_Y, __MESSAGE_HARD_MODE_GUESS_NOT_VALID_STR, NULL);
         }
-        else if (guess_num == MAX_GUESSES) {
-            gameplay_handle_lose();
-        } else {
-            board_update_cursor();
-        }
+        else {
 
-        // Reset guess to empty and prepare for next one
-        memset(guess, 0, WORD_LENGTH);
+            // Otherwise process the guess word
+
+            board_draw_word(guess_num, guess, BOARD_HIGHLIGHT_YES);
+            guess_num += 1;
+            keyboard_update_from_guess();
+            // keyboard_update_cursor();
+
+            // == Handle Game Over scenarios ==
+
+            // Check for correct match
+            bool game_was_won = (strcmp(word, guess) == 0);
+
+            if (game_was_won) {
+                // Hide cursor so it doesn't flash between popups
+                PLAY_SOUND_LEVEL_UP;
+                board_hide_row_cursor();
+                board_hide_letter_cursor();
+                show_win_message(guess_num);
+                stats_update(GAME_WAS_WON, guess_num);
+                GAMEPLAY_SET_GAMEOVER;
+            }
+            else if (guess_num == MAX_GUESSES) {
+                // sets: GAMEPLAY_SET_GAMEOVER;
+                gameplay_handle_lose();
+            } else {
+                guess_letter_cursor = LETTER_CURSOR_START; // reset letter cursor to start of row
+                board_update_row_cursor();
+                board_update_letter_cursor();
+            }
+
+            // Store guess / Eval results, for hard mode
+            copy_or_reset_prev_guess(guess);
+
+            // Reset guess to empty and prepare for next guess
+            for (uint8_t c = 0; c < WORD_LENGTH; c++)
+                guess[c] = 0;
+
+            // If requested, try to auto-fill next guess if game is not over
+            if ((opt_autofill_enabled) && (game_state != GAME_STATE_OVER))
+                board_autofill_matched_letters();
+        }
     }
 }
 
@@ -203,12 +246,19 @@ void gameplay_init_maps(void) {
 // Runs on startup and before start of a new gameplay round
 void gameplay_restart(void) {
 
+    // Reset round level vars
     guess_num = 0;
-    memset(guess, 0, sizeof(guess));
+    guess_letter_cursor = LETTER_CURSOR_START;
+
+    for (uint8_t c = 0; c < WORD_LENGTH; c++) {
+        guess[c] = 0;
+        exact_matches[c] = 0;
+    }
 
     // Draws initial empty board and keyboard
     board_redraw_clean();
-    board_update_cursor();
+    board_update_row_cursor();
+    board_update_letter_cursor();
 
     keyboard_reset();
 
@@ -223,6 +273,11 @@ void gameplay_restart(void) {
 // Runs the main gameplay: word entry, answer checking, messaging
 void gameplay_run(void)
 {
+    bool keys_select_consumed = false;
+    uint8_t menu_select_count = 0;
+
+    // make sure all keys are released before starting gameplay
+    waitpadreleased_lowcpu(J_ANY_KEY);
 
     while(game_state == GAME_STATE_RUNNING) {
         wait_vbl_done();
@@ -243,49 +298,73 @@ void gameplay_run(void)
                     RESET_KEY_REPEAT(KEY_REPEAT_DPAD_RELOAD_VAL);
 
                 // Filter with D-Pad to allow movement while still pressing A / B
-                switch(keys & J_DPAD) {
-                    // Keyboard Movement
-                    case J_RIGHT:
-                        keyboard_move_cursor(1, 0);
-                        break;
-
-                    case J_LEFT:
-                        keyboard_move_cursor(-1, 0);
-                        break;
-
-                    case J_UP:
-                        keyboard_move_cursor(0, -1);
-                        break;
-
-                    case J_DOWN:
-                        keyboard_move_cursor(0, 1);
-                        break;
-                }
+                keyboard_move_cursor(keys & J_DPAD);
             }
         }
 
-        if (KEY_TICKED(J_A | J_B | J_SELECT | J_START)) {
-            switch(keys) {
+        if (KEY_RELEASED(J_SELECT)) {
+            switch(previous_keys & J_SELECT) {
 
                 // Show Options menu
                 case J_SELECT:
                     // Can set game_state to lost (exiting loop)
-                    show_options_message();
+                    //
+                    // * Select is also used as a modifier, so
+                    //   only trigger if it wasn't used for that
+                    if (!keys_select_consumed) {
+
+                        // Require N select presses in a row to spawn menu
+                        menu_select_count++;
+                        if (menu_select_count >= MENU_SELECT_COUNT_TRIGGER) {
+                            show_options_message();
+                            waitpadreleased_lowcpu(J_SELECT);
+                            menu_select_count = MENU_SELECT_COUNT_RESET;
+                        }
+                    }
+
+                    // reset modified state
+                    keys_select_consumed = false;
                     break;
+            }
+        }
+
+
+        if (KEY_TICKED(J_A | J_B | J_START)) {
+            switch(keys & (J_A | J_B | J_START)) {
 
                 // Check a guess
                 case J_START:
-                    // Can set game_state to won / lost (exiting loop)
-                    gameplay_handle_guess();
+                    if (keys & J_SELECT) {
+                        board_autofill_matched_letters();
+                        keys_select_consumed = true;
+                    } else
+                        // Can set game_state to won / lost (exiting loop)
+                        gameplay_handle_guess();
                     break;
 
                 // Add/Remove letters from a guess
                 case J_A:
-                    board_add_guess_letter();
+                    if (keys & J_SELECT) {
+                        if (guess_letter_cursor < LETTER_CURSOR_MAX)
+                            guess_letter_cursor++;
+
+                        keys_select_consumed = true;
+                    } else
+                        board_add_guess_letter();
+
+                    board_update_letter_cursor();
                     break;
 
                 case J_B:
-                    board_remove_guess_letter();
+                    if (keys & J_SELECT) {
+                        if (guess_letter_cursor > LETTER_CURSOR_START)
+                            guess_letter_cursor--;
+
+                        keys_select_consumed = true;
+                    } else
+                        board_remove_guess_letter();
+
+                    board_update_letter_cursor();
                     break;
             }
         }
