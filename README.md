@@ -9,7 +9,7 @@ It adds a full dictionary (versus the bloom filter), thousands more solution wor
 
 ### Download ROMs and Play Online
 
-Downloads and online playable version at: https://bbbbbr.itch.io/gb-wordyl
+Downloads and online playable version are at: https://bbbbbr.itch.io/gb-wordyl
 
 ![GB-Wordyl gameplay](/info/gb-wordyl_demo_cgb.gif)
 
