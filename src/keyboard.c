@@ -16,7 +16,7 @@
 const char *kb[KEYBD_ROWS] = {
 "QWERTYUIOP",
  "ASDFGHJKL",
-  "ZXCVBNM"};
+  "ZXCVBNM"CEDILLA_MAPPED_CHR_STRQUOTE}; // [ is Ç
 
 // Stores color coding for keyboard basde on guess data
 uint8_t kb_status[KEYBD_ROWS][10];
@@ -26,7 +26,7 @@ uint8_t kb_status[KEYBD_ROWS][10];
 const int8_t kb_row_len[KEYBD_ROWS] = {
     10,
     9,
-    7
+    8 // 7
 };
 
 // Which tile column each keyboard row starts on

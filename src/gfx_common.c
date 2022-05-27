@@ -82,6 +82,10 @@ void print_str(const char * txt) {
             letter = BG_TILES_FONT_NUM_START + (unsigned char)(src_chr - '0');
         } else {
             switch (src_chr) {
+                // The top two don't work due to signed char
+                // case 'ç': // Fall Through to single quote char
+                // case 'Ç': // Fall Through to single quote char
+                case CEDILLA_MAPPED_CHR: letter = BG_TILES_FONT_CEDILLA; break;
                 case '\"': // Fall Through to single quote char
                 case '\'': letter = BG_TILES_FONT_QUOTE; break;
                 case '.': letter = BG_TILES_FONT_PERIOD; break;
@@ -94,8 +98,8 @@ void print_str(const char * txt) {
                 case '^': letter = BG_TILES_FONT_BUTTON_U; break;
                 case '/': letter = BG_TILES_FONT_BUTTON_D; break;
 
-                case '{': letter = BG_TILES_FONT_CHECKBOX_ON; break;
-                case '}': letter = BG_TILES_FONT_CHECKBOX_OFF; break;
+                case CHECKBOX_ON_CHR:  letter = BG_TILES_FONT_CHECKBOX_ON; break;
+                case CHECKBOX_OFF_CHR: letter = BG_TILES_FONT_CHECKBOX_OFF; break;
 
                 // Default is blank tile for Space or any other unknown chars
                 default:  letter = BG_TILES_BLANK_START; break;

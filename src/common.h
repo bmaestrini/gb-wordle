@@ -22,7 +22,9 @@
 // #define DEBUG_REVEAL_WHILE_TYPE
 // #define DEBUG_FORCE_WORD "AMPLE"
 // #define DEBUG_FORCE_WORD "HUMAN"
+// #define DEBUG_FORCE_WORD "ACAÇA"
 // #define DEBUG_REVEAL_WORD
+#define DEBUG_FORCE_WORD_BY_NUM  39u
 // #define DEBUG_FORCE_WORD_BY_NUM  2294u //2200u // 2200u // 2295u // 2200u // 0u // 100u // 1351u
 // TODO: show answer word number
 
@@ -30,6 +32,11 @@
 #define STR(s) _STR(s)
 
 #define ARRAY_LEN(A)  sizeof(A) / sizeof(A[0])
+
+#define CEDILLA_MAPPED_CHR_STRQUOTE    "["
+#define CEDILLA_MAPPED_CHR   '['
+#define CHECKBOX_ON_CHR      '|'
+#define CHECKBOX_OFF_CHR     '}'
 
 
 // Game flow control

@@ -12,6 +12,8 @@
 #include "encoded.h"
 #include "sizes.h"
 
+#define CEDILLA_CHR_NUM 26 // a = 0, z = 25, ç = 26 ('{', the letter after lowercase 'z')
+
 //  ====== ENCODE / DECODE Settings ======
 
 #define _ASM_GETSPECIALWORD
@@ -19,8 +21,8 @@
 // #define _ASM_UPDATEWORD_7BIT_VARINT
 #define _UPDATEWORD_3BIT_VARINT
 
-#define ALPHABET_REMAP
-#define WORD_LETTERS_REVERSED
+// #define ALPHABET_REMAP
+// #define WORD_LETTERS_REVERSED
 
 // #define NO_ZERO_DELTA_SUBTRACT
 #define YES_ZERO_DELTA_SUBTRACT
@@ -275,7 +277,10 @@ void updateWord_7bit_varint(void) OLDCALL {
 // Applies alphabet remapping to a character
 inline char check_alpha_remap_char(char c) {
     #ifdef ALPHABET_REMAP
-        return alpha_newmap[c - 'A'];
+        if (c == ('A' + CEDILLA_CHR_NUM))
+            return c;
+        else
+            return alpha_newmap[c - 'A'];
     #else
         return c;
     #endif
@@ -284,7 +289,10 @@ inline char check_alpha_remap_char(char c) {
 // Reverse alphabet remapping that was previously applied to a character
 inline char check_alpha_unmap_char(char c) {
     #ifdef ALPHABET_REMAP
-        return alpha_unmap[c - 'A'];
+        if (c == ('A' + CEDILLA_CHR_NUM))
+            return c;
+        else
+            return alpha_unmap[c - 'A'];
     #else
         return c;
     #endif

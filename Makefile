@@ -10,7 +10,8 @@ VERSION=1.00
 # de en es fr it nl pt-br
 # make LANG_CODE=<lang code>
 ifndef LANG_CODE
-	LANG_CODE=en
+#	LANG_CODE=en
+	LANG_CODE=ca
 endif
 
 # Alternate languages can be passed in as follows
@@ -20,8 +21,8 @@ endif
 # make CART_TYPE=<cart type>
 ifndef CART_TYPE
 #	CART_TYPE=32k_nosave
-#	CART_TYPE=mbc5
-	CART_TYPE=31k_1kflash
+	CART_TYPE=mbc5
+#	CART_TYPE=31k_1kflash
 endif
 
 CFLAGS += -DLANG_CODE=$(LANG_CODE)
@@ -53,6 +54,13 @@ ifeq ($(CART_TYPE),31k_1kflash)
 	# Add the flash 1K region as an exclusive no-use area for rom usage calcs
 	ROMUSAGE_flags = -e:FLASH_SAVE:7C00:400
 endif
+# Handle cart specific flags
+ifeq ($(CART_TYPE),32k_nosave)
+	TARGETS=gb pocket
+	LCCFLAGS_gb      += # bare 32K
+	LCCFLAGS_pocket  += #
+endif
+
 
 # Targets can be forced with this override, but normally they will be controlled per-cart type above
 #
@@ -169,28 +177,30 @@ $(BINS):	$(OBJS)
 
 
 langs:
-	${MAKE} LANG_CODE=de    CART_TYPE=$(CART_TYPE)
-	${MAKE} LANG_CODE=en    CART_TYPE=$(CART_TYPE)
-	${MAKE} LANG_CODE=es    CART_TYPE=$(CART_TYPE)
-	${MAKE} LANG_CODE=fr    CART_TYPE=$(CART_TYPE)
-	${MAKE} LANG_CODE=it    CART_TYPE=$(CART_TYPE)
-	${MAKE} LANG_CODE=nl    CART_TYPE=$(CART_TYPE)
-	${MAKE} LANG_CODE=la    CART_TYPE=$(CART_TYPE)
-	${MAKE} LANG_CODE=pt-br CART_TYPE=$(CART_TYPE)
-	${MAKE} LANG_CODE=kw    CART_TYPE=$(CART_TYPE)
+	${MAKE} LANG_CODE=ca    CART_TYPE=$(CART_TYPE)
+# 	${MAKE} LANG_CODE=de    CART_TYPE=$(CART_TYPE)
+# 	${MAKE} LANG_CODE=en    CART_TYPE=$(CART_TYPE)
+# 	${MAKE} LANG_CODE=es    CART_TYPE=$(CART_TYPE)
+# 	${MAKE} LANG_CODE=fr    CART_TYPE=$(CART_TYPE)
+# 	${MAKE} LANG_CODE=it    CART_TYPE=$(CART_TYPE)
+# 	${MAKE} LANG_CODE=nl    CART_TYPE=$(CART_TYPE)
+# 	${MAKE} LANG_CODE=la    CART_TYPE=$(CART_TYPE)
+# 	${MAKE} LANG_CODE=pt-br CART_TYPE=$(CART_TYPE)
+# 	${MAKE} LANG_CODE=kw    CART_TYPE=$(CART_TYPE)
 #   PT full answer file is too big
 #	${MAKE} LANG_CODE=pt
 
 langs-clean:
-	${MAKE} clean LANG_CODE=de     CART_TYPE=$(CART_TYPE)
-	${MAKE} clean LANG_CODE=en     CART_TYPE=$(CART_TYPE)
-	${MAKE} clean LANG_CODE=es     CART_TYPE=$(CART_TYPE)
-	${MAKE} clean LANG_CODE=fr     CART_TYPE=$(CART_TYPE)
-	${MAKE} clean LANG_CODE=it     CART_TYPE=$(CART_TYPE)
-	${MAKE} clean LANG_CODE=nl     CART_TYPE=$(CART_TYPE)
-	${MAKE} clean LANG_CODE=la     CART_TYPE=$(CART_TYPE)
-	${MAKE} clean LANG_CODE=pt-br  CART_TYPE=$(CART_TYPE)
-	${MAKE} clean LANG_CODE=kw     CART_TYPE=$(CART_TYPE)
+	${MAKE} clean LANG_CODE=ca     CART_TYPE=$(CART_TYPE)
+# 	${MAKE} clean LANG_CODE=de     CART_TYPE=$(CART_TYPE)
+# 	${MAKE} clean LANG_CODE=en     CART_TYPE=$(CART_TYPE)
+# 	${MAKE} clean LANG_CODE=es     CART_TYPE=$(CART_TYPE)
+# 	${MAKE} clean LANG_CODE=fr     CART_TYPE=$(CART_TYPE)
+# 	${MAKE} clean LANG_CODE=it     CART_TYPE=$(CART_TYPE)
+# 	${MAKE} clean LANG_CODE=nl     CART_TYPE=$(CART_TYPE)
+# 	${MAKE} clean LANG_CODE=la     CART_TYPE=$(CART_TYPE)
+# 	${MAKE} clean LANG_CODE=pt-br  CART_TYPE=$(CART_TYPE)
+# 	${MAKE} clean LANG_CODE=kw     CART_TYPE=$(CART_TYPE)
 #   PT full answer file is too big
 #	${MAKE} LANG_CODE=pt
 

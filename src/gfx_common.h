@@ -90,7 +90,7 @@ void gfx_load(void);
 
 // TODO: COUNT needs to be BOARD SIZE IN TILES (5 * 6 * 4)
 #define BOARD_LETTERS_BYTES_PER_TILE  8u // 1bpp tiles = 8 bytes per 8x8 tile
-#define BOARD_LETTERS_ALPHA           26u
+#define BOARD_LETTERS_ALPHA           (26u + 1u) // +1 for Cedilla
 #define BOARD_LETTERS_BLANK           1u
 #define BOARD_LETTERS_FLIP            4u
 #define BOARD_LETTERS_COUNT          (BOARD_LETTERS_ALPHA + BOARD_LETTERS_BLANK + BOARD_LETTERS_FLIP) // Last entry is blank space
@@ -124,7 +124,7 @@ void gfx_load(void);
 #define BG_TILES_BLANK_LEN   1u
 
 #define BG_TILES_KEYBD_START  (BG_TILES_BLANK_START + BG_TILES_BLANK_LEN)
-#define BG_TILES_KEYBD_LEN    26u // 26 letters
+#define BG_TILES_KEYBD_LEN    (26u + 1u) // 26 letters + 1 for cedilla
 
 #define BG_TILES_BOARD_LETTERS_START (BG_TILES_KEYBD_START + BG_TILES_KEYBD_LEN)
 #define BG_TILES_BOARD_LETTERS_LEN   (BOARD_GRID_W * BOARD_GRID_H * BOARD_GRID_TILES_PER_LETTER)
@@ -136,23 +136,26 @@ void gfx_load(void);
 
 #define BG_TILES_FONT_START   (BG_TILES_INTRO_DIALOG_START + BG_TILES_INTRO_DIALOG_LEN)
 
-        #define BG_TILES_FONT_PERIOD  (BG_TILES_FONT_START + 26u)
-        #define BG_TILES_FONT_EXCLAIM (BG_TILES_FONT_START + 27u)
-        #define BG_TILES_FONT_QMARK   (BG_TILES_FONT_START + 28u)
-        #define BG_TILES_FONT_COLON   (BG_TILES_FONT_START + 29u)
-        #define BG_TILES_FONT_PLUS    (BG_TILES_FONT_START + 30u)
-        #define BG_TILES_FONT_QUOTE   (BG_TILES_FONT_START + 31u)
+        #define BG_TILES_FONT_CEDILLA (BG_TILES_FONT_START + 26u) // This is counted in the letters, but here for printing convenience
+
+        #define BG_TILES_FONT_PERIOD  (BG_TILES_FONT_START + 27u)
+        #define BG_TILES_FONT_EXCLAIM (BG_TILES_FONT_START + 28u)
+        #define BG_TILES_FONT_QMARK   (BG_TILES_FONT_START + 29u)
+        #define BG_TILES_FONT_COLON   (BG_TILES_FONT_START + 30u)
+        #define BG_TILES_FONT_PLUS    (BG_TILES_FONT_START + 31u)
+        #define BG_TILES_FONT_QUOTE   (BG_TILES_FONT_START + 32u)
 
         // Gamepad Buttons
         // #define BG_TILES_FONT_BUTTON_A (BG_TILES_FONT_START + 29u)
         // #define BG_TILES_FONT_BUTTON_B (BG_TILES_FONT_START + 30u)
-        #define BG_TILES_FONT_BUTTON_U (BG_TILES_FONT_START + 32u) // '^' char
-        #define BG_TILES_FONT_BUTTON_D (BG_TILES_FONT_START + 33u) // '/' char
-        #define BG_TILES_FONT_BUTTON_L (BG_TILES_FONT_START + 34u) // '<' char
-        #define BG_TILES_FONT_BUTTON_R (BG_TILES_FONT_START + 35u) // '>' char
+        #define BG_TILES_FONT_BUTTON_U (BG_TILES_FONT_START + 33u) // '^' char
+        #define BG_TILES_FONT_BUTTON_D (BG_TILES_FONT_START + 34u) // '/' char
+        #define BG_TILES_FONT_BUTTON_L (BG_TILES_FONT_START + 35u) // '<' char
+        #define BG_TILES_FONT_BUTTON_R (BG_TILES_FONT_START + 36u) // '>' char
 
-        #define BG_TILES_FONT_CHECKBOX_OFF (BG_TILES_FONT_START + 36u) // not str printable
-        #define BG_TILES_FONT_CHECKBOX_ON  (BG_TILES_FONT_START + 37u) // not str printable
+        #define BG_TILES_FONT_CHECKBOX_OFF (BG_TILES_FONT_START + 37u) // not str printable
+        #define BG_TILES_FONT_CHECKBOX_ON  (BG_TILES_FONT_START + 38u) // not str printable
+
     #define BG_TILES_LAST     (BG_TILES_FONT_CHECKBOX_ON)
 
 #define BG_TILES_FONT_LEN     ((BG_TILES_LAST - BG_TILES_FONT_START) + 1u)

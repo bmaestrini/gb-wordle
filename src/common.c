@@ -38,9 +38,9 @@ void str_bool_checkbox_at_X(uint8_t * p_str, bool is_enabled) {
     while ((*p_str != '^') && (*p_str)) p_str++;
 
     if (is_enabled)
-        *p_str = '{'; // Checkbox ON swap char
+        *p_str = CHECKBOX_ON_CHR; // Checkbox ON swap char
     else
-        *p_str = '}'; // Checkbox ON swap char
+        *p_str = CHECKBOX_OFF_CHR; // Checkbox OFF swap char
 }
 
 

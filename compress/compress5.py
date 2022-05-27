@@ -3,7 +3,10 @@
 import sys
 
 # Default language, override with first console arg
-lang = "en"
+lang = "ca" # Catalan
+CEDILLA_CHR_NUM = 26 # a = 0, z = 25 (Note: in decode side all caps are used, so it becomes char after 'Z' instead)
+ALPHA_LETTER_COUNT = 27
+
 
 ### ENCODING SETTINGS ###
 
@@ -33,8 +36,11 @@ ENCODING_ORDER_3BIT_LSBITS = "high-bits-first"
 WORD_NUMERIC_ENCODING = "3-bit-variable"
 # WORD_NUMERIC_ENCODING = "4-bit-variable"
 
-ALPHABET_REMAP = "freq_of_use"
-WORD_LETTER_ORDER = "reverse"
+#  These can both be turned on for Catalan
+#   * But only ALPHABET_REMAP makes the compressed size smaller
+#   * WORD_LETTER_ORDER actually makes the compressed output larger
+# ALPHABET_REMAP = "freq_of_use"
+# WORD_LETTER_ORDER = "reverse"
 
 # ZERO_DELTA = "never-substract-by-one"
 
@@ -67,6 +73,9 @@ def preprocessWord(w):
     # Reverse order of letters ("tiles" -> "selit")
     if (WORD_LETTER_ORDER == "reverse"):
         w = w[::-1]
+
+    # Remap any special chars
+    w = remapSpecialChars(w)
 
     return w
 
@@ -140,11 +149,29 @@ def remapAlpha(source_word):
     remapped_word = ""
 
     for letter in range(len(source_word)):
-        for c in range(len(remaped_alpha)):
-            if (source_word[letter] == remaped_alpha[c]):
-                # print(source_word[letter] + " -> " + remaped_alpha[c] + "(" + str(c) + ") == " + chr(ord('a') + c))
-                remapped_word += chr(ord('a') + c)
-                break
+        # Cedilla does not get remapped, it is always 27th letter
+        if (source_word[letter] == 'ç'):
+            remapped_word += source_word[letter]
+        else:
+            for c in range(len(remaped_alpha)):
+                if (source_word[letter] == remaped_alpha[c]):
+                    # print(source_word[letter] + " -> " + remaped_alpha[c] + "(" + str(c) + ") == " + chr(ord('a') + c))
+                    remapped_word += chr(ord('a') + c)
+                    break
+
+    return remapped_word
+
+
+def remapSpecialChars(source_word):
+
+    remapped_word = ""
+
+    for letter in range(len(source_word)):
+        # Cedilla gets converted to '{', the char right after lowercase 'z'
+        if (source_word[letter] == 'ç'):
+             remapped_word += chr(ord('a') + CEDILLA_CHR_NUM)
+        else:
+            remapped_word += source_word[letter]
 
     return remapped_word
 
@@ -352,7 +379,7 @@ with open("answers_" + lang + ".txt") as f:
 
 # Sort Dictionary Word List and split it into first-letter buckets
 allWords = tuple(sorted(allWords))
-buckets = [[] for i in range(26)]
+buckets = [[] for i in range(ALPHA_LETTER_COUNT)]
 for w in allWords:
     # print("allwords: %u: %s" % (input_byte_length / 5, w))
     input_byte_length += 5 # 5 letters per word
@@ -392,7 +419,7 @@ outfile.write("const dictIndexBucket_t dictIndexes[%u] = {\n" % (len(blobIndexes
 
 for i in range(len(blobIndexes)):
     outfile.write("  { 0x%04X, 0x%04X, 0x%02X, 0x%06X }, // %s: %4u words\n" % (blobIndexes[i][0], blobIndexes[i][1], blobIndexes[i][2], blobIndexes[i][3],
-                                                                      str(chr(ord('a')+ blobIndexes[i][2])) if blobIndexes[i][2] < 26 else "end",
+                                                                      str(chr(ord('a')+ blobIndexes[i][2])) if blobIndexes[i][2] < ALPHA_LETTER_COUNT else "end",
                                                                       blobIndexes[i][0]))
     # print("  /* %s */ { 0x%04X, 0x%04X, 0x%02X, 0x%06X }," % (str(chr(ord('a')+ blobIndexes[i][2])) if blobIndexes[i][2] < 26 else "end",
     #                    blobIndexes[i][0], blobIndexes[i][1], blobIndexes[i][2], blobIndexes[i][3]))
