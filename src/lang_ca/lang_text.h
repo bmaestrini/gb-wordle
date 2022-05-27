@@ -18,20 +18,20 @@
 #undef __INTRO_MESSAGE_STR
 #define __INTRO_MESSAGE_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "LANGUAGE ...... " STR(LANG_CODE) "\n" \
-    "  A..Z ONLY + [\n" \
-    "  NO SPECIAL CHARS\n" \
+    "IDIOMA ...... " STR(LANG_CODE) "\n" \
+    "  NOMES A..Z\n" \
+    "  SENSE SIMBOLS\n" \
     "\n" \
-    "IN GAME MENU:\n" \
+    "MENU DE JOC:\n" \
     "  3 x SELECT\n" \
     "\n" \
-    "BOARD CURSOR:\n" \
+    "CURSOR DE PARAULA:\n" \
     "  SELECT + B A\n" \
     "\n" \
-    "AUTO FILL:\n" \
+    "AUTOEMPLENAT:\n" \
     "  SELECT + START\n" \
     "\n" \
-    "PRESS ANY KEY"
+    "PREMEU UNA TECLA"
 
 
 // #undef HELP_LEGEND_MAP_Y
@@ -43,15 +43,15 @@
 #undef __HELP_LEGEND_DIALOG_STR
 #define __HELP_LEGEND_DIALOG_STR \
 /*  |----------------XX| Available space (16 chars wide, 2 reserved for letter legend tiles) */\
-    "COLOR KEY:\n" \
+    "LLEGENDA:\n" \
     "\n" \
-    "NO MATCH .......\n" \
-    "\n" \
-    "\n" \
-    "WRONG PLACE ....\n" \
+    "NO COINCIDEIX ..\n" \
     "\n" \
     "\n" \
-    "MATCH ..........\n"
+    "LLOC ERRONI ....\n" \
+    "\n" \
+    "\n" \
+    "ENCERT..........\n"
 
 
 #undef MENU_Y_EXIT
@@ -71,20 +71,20 @@
 #undef __OPTIONS_MENU_STR
 #define __OPTIONS_MENU_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    " ... OPTIONS ...\n" \
+    " ... OPCIONS ...\n" \
     "\n" \
-    " EXIT MENU\n" \
+    " SURT DEL MENU\n" \
     "\n" \
-    " HARD MODE  .... ^\n" \
-    " AUTO FILL  .... ^\n" \
-    " SKIP AUTOFILLED ^\n" \
-    " SOUND FX  ..... ^\n" \
+    " MODE DIFICIL .. ^\n" \
+    " AUTOEMPLENAT  . ^\n" \
+    " SALTA EMPLENATS ^\n" \
+    " EFECTES DE SO . ^\n" \
     "\n" \
-    " SHOW STATS\n" \
-    " FORFEIT ROUND\n" \
-    " RESET STATS\n" \
+    " ESTADISTIQUES\n" \
+    " RENDIR-SE\n" \
+    " ESBORRA ESTAD.\n" \
     "\n" \
-    " HELP"
+    " AJUDA"
 
 // "SKIP FILLED" is ok for "SKIP AUTOFILLED"
 
@@ -111,16 +111,16 @@
 #undef __CONFIRM_DIALOG_STR
 #define __CONFIRM_DIALOG_STR \
 /*  |------------------| Available space (18 chars wide) */ \
-    "CONFIRM:^\n" \
-    "CANCEL: OTHER KEYS\n"\
+    "CONFIRMACIO:^\n" \
+    "ENRERE: QUALSEVOL\n"\
     "..................\n" \
     "\n" \
 
 #undef __CONFIRM_FORFEIT_STR
-#define __CONFIRM_FORFEIT_STR     "FORFEIT ROUND?"
+#define __CONFIRM_FORFEIT_STR     "RENDIR-SE?"
 
 #undef __CONFIRM_STATS_RESET_STR
-#define __CONFIRM_STATS_RESET_STR "RESET STATS?"
+#define __CONFIRM_STATS_RESET_STR "REINICIAR-LES?"
 
 
 // Display hard mode indicator at top of screen
@@ -131,34 +131,34 @@
 
 #undef __STR_HARD_MODE_DISPLAY
 #undef __STR_HARD_MODE_HIDE
-#define __STR_HARD_MODE_DISPLAY "HARD"
+#define __STR_HARD_MODE_DISPLAY "DIFICIL"
 #define __STR_HARD_MODE_HIDE    "    "
 
 
 #undef __MESSAGE_HARD_MODE_CANT_CHANGE_STR
 #define __MESSAGE_HARD_MODE_CANT_CHANGE_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "HARD MODE: CAN\n" \
-    "ONLY CHANGE AT\n" \
-    "START OF ROUND"
+    "MODE DIFICIL:\n" \
+    "NOMES CANVIABLE\n" \
+    "AL PRINCIPI"
 
 
 // Avoid increasing this popup height so it doesn't obscure the board
 #undef __MESSAGE_HARD_MODE_GUESS_NOT_VALID_STR
 #define __MESSAGE_HARD_MODE_GUESS_NOT_VALID_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "HARD MODE: GUESS\n" \
-    "MUST HAVE ALL\n" \
-    "REVEALED CLUES"
+    "MODE DIFICIL: CAL\n" \
+    "USAR TOTES\n" \
+    "LES PISTES"
 
 
 // Avoid increasing this popup height so it doesn't obscure the board
 #undef __MESSAGE_LOSE_STR
 #define __MESSAGE_LOSE_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "You lose. Sorry!\n" \
+    "Oh! Has perdut\n" \
     "\n" \
-    "Answer is: "    // <-- Needs 5 chars left for answer word!
+    "La resposta: "    // <-- Needs 5 chars left for answer word!
 
 
 // NOTE! ^ gets replaced with guess 5 letter word num
@@ -167,59 +167,59 @@
 #undef __MESSAGE_GAME_WON_STR
 #define __MESSAGE_GAME_WON_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "You won!\n" \
+    "Visca! Has guanyat\n" \
     "\n" \
-    "On Guess ^ of 6"
+    "En ^ de 6 intents"
 
 
 // Avoid increasing this popup height so it doesn't obscure the board
 #undef __MESSAGE_WORD_TOO_SHORT_STR
 #define __MESSAGE_WORD_TOO_SHORT_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "Word is too short!\n" \
+    "Massa curt!\n" \
     "\n" \
-    "Needs 5 Letters"
+    "Minim 5 lletres"
 
 
 // Avoid increasing this popup height so it doesn't obscure the board
 #undef __MESSAGE_WORD_NOT_IN_DICT_STR
 #define __MESSAGE_WORD_NOT_IN_DICT_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "Word is not in\n" \
+    "La paraula no es\n" \
     "\n" \
-    "dictionary!"
+    "al diccionari!"
 
 
 #undef __MESSAGE_STATS_RESET_STR
 #define __MESSAGE_STATS_RESET_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "STATS RESET!"
+    "TOT LLEST!"
 
 
 #undef __STATS_TEMPLATE_STR
 #define __STATS_TEMPLATE_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    " Played  ____^\n" \
-    " Streak  ____^\n" \
-    " Wins    ____^\n" \
-    " Losses  ____^\n" \
+    " Partides  ____^\n" \
+    " Ratxa     ____^\n" \
+    " Guanyades ____^\n" \
+    " Perdudes  ____^\n" \
     "\n" \
-    "Guesses to Win\n" \
-    " Least   ____^\n" \
-    " Most    ____^\n" \
-    " Average ____^\n"   // <-- All "____^" get replaced by numbers
+    "Intents\n" \
+    " Minims   ____^\n" \
+    " Maxims   ____^\n" \
+    " Mitjana  ____^\n"   // <-- All "____^" get replaced by numbers
 
 // Should be no more than 18 chars
 #undef __INTRO_PRESS_START_STR
 #undef __INTRO_PRESS_START_STR_BLANK
-#define __INTRO_PRESS_START_STR       "PRESS  START"
+#define __INTRO_PRESS_START_STR       "PREMEU START"
 #define __INTRO_PRESS_START_STR_BLANK "            "
 
 // X, Y controls upper-left corner coordinates
 #undef __INTRO_CREDITS_STR
 #define __INTRO_CREDITS_STR \
 /*  |--------------------| */\
-    "THX TO:\n" \
+    "GRACIES A:\n" \
     "TOXA\n" \
     "DAEO\n" \
     "ARPRUSS\n" \
@@ -229,7 +229,6 @@
     "GBDK2020\n" \
     "EMULICIOUS\n" \
     "FERRANTE CRAFTS"
-
 
 #endif
 
