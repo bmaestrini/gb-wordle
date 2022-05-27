@@ -24,7 +24,7 @@
 // #define DEBUG_FORCE_WORD "HUMAN"
 // #define DEBUG_FORCE_WORD "ACAÇA"
 // #define DEBUG_REVEAL_WORD
-#define DEBUG_FORCE_WORD_BY_NUM  39u
+// #define DEBUG_FORCE_WORD_BY_NUM  39u
 // #define DEBUG_FORCE_WORD_BY_NUM  2294u //2200u // 2200u // 2295u // 2200u // 0u // 100u // 1351u
 // TODO: show answer word number
 
