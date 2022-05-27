@@ -9,7 +9,7 @@
 
 // == #define overrides for language strings go here
 
-// Spanish: Translation by Adamantibus
+// Catalan: Not yet translated
 
 // Use '[' for 'Ç'
 
@@ -18,20 +18,20 @@
 #undef __INTRO_MESSAGE_STR
 #define __INTRO_MESSAGE_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "IDIOMA ...... " STR(LANG_CODE) "\n" \
-    "  SOLO A..Z + [\n" \
-    "  NO CAR. ESPEC.\n" \
+    "LANGUAGE ...... " STR(LANG_CODE) "\n" \
+    "  A..Z ONLY + [\n" \
+    "  NO SPECIAL CHARS\n" \
     "\n" \
-    "VER MENU:\n" \
-    " SELECT x 3\n" \
+    "IN GAME MENU:\n" \
+    "  3 x SELECT\n" \
     "\n" \
-    "MOVER CURSOR:\n" \
+    "BOARD CURSOR:\n" \
     "  SELECT + B A\n" \
     "\n" \
-    "AUTORELLENAR:\n" \
+    "AUTO FILL:\n" \
     "  SELECT + START\n" \
     "\n" \
-    "PULSA OTRA TECLA"
+    "PRESS ANY KEY"
 
 
 // #undef HELP_LEGEND_MAP_Y
@@ -43,14 +43,15 @@
 #undef __HELP_LEGEND_DIALOG_STR
 #define __HELP_LEGEND_DIALOG_STR \
 /*  |----------------XX| Available space (16 chars wide, 2 reserved for letter legend tiles) */\
-    "CLAVE:\n" \
+    "COLOR KEY:\n" \
     "\n" \
-    "FALLO ..........\n" \
+    "NO MATCH .......\n" \
     "\n" \
-    "POSICION\n"\
-    "  INCORRECTA ...\n" \
     "\n" \
-    "ACIERTO ........"
+    "WRONG PLACE ....\n" \
+    "\n" \
+    "\n" \
+    "MATCH ..........\n"
 
 
 #undef MENU_Y_EXIT
@@ -66,25 +67,24 @@
 // Leading space on each line is room for Cursor
 // MAX Height is 16
 #undef OPTIONS_MENU_DIALOG_WIN_Y
-#define OPTIONS_MENU_DIALOG_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(15)
+#define OPTIONS_MENU_DIALOG_WIN_Y  DIALOG_TEXT_HEIGHT_LINES(14)
 #undef __OPTIONS_MENU_STR
 #define __OPTIONS_MENU_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    " ... OPCIONES ...\n" \
+    " ... OPTIONS ...\n" \
     "\n" \
-    " SALIR DEL MENU\n" \
+    " EXIT MENU\n" \
     "\n" \
-    " MODO DIFICIL .. ^\n" \
-    " AUTORELLENAR .. ^\n" \
-    " SALTAR\n" \
-    "   COMPLETADAS . ^\n" \
-    " SONIDO FX ..... ^\n" \
+    " HARD MODE  .... ^\n" \
+    " AUTO FILL  .... ^\n" \
+    " SKIP AUTOFILLED ^\n" \
+    " SOUND FX  ..... ^\n" \
     "\n" \
-    " VER STATS\n" \
-    " ABANDONAR\n" \
-    " BORRAR STATS\n" \
+    " SHOW STATS\n" \
+    " FORFEIT ROUND\n" \
+    " RESET STATS\n" \
     "\n" \
-    " AYUDA"
+    " HELP"
 
 // "SKIP FILLED" is ok for "SKIP AUTOFILLED"
 
@@ -97,13 +97,13 @@
 #define MENU_Y_HARD_MODE     4
 #define MENU_Y_AUTO_FILL     5
 #define MENU_Y_SKIP_FILLED   6
-#define MENU_Y_SOUND_FX      8
-// space                     9
-#define MENU_Y_SHOW_STATS    10
-#define MENU_Y_FORFEIT_ROUND 11
-#define MENU_Y_RESET_STATS   12
-// space                     13
-#define MENU_Y_HELP          14
+#define MENU_Y_SOUND_FX      7
+// space                     8
+#define MENU_Y_SHOW_STATS    9
+#define MENU_Y_FORFEIT_ROUND 10
+#define MENU_Y_RESET_STATS   11
+// space                     12
+#define MENU_Y_HELP          13
 
 
 
@@ -111,16 +111,16 @@
 #undef __CONFIRM_DIALOG_STR
 #define __CONFIRM_DIALOG_STR \
 /*  |------------------| Available space (18 chars wide) */ \
-    "CONFIRMAR:^\n" \
-    "CANCELAR: OTRO\n"\
+    "CONFIRM:^\n" \
+    "CANCEL: OTHER KEYS\n"\
     "..................\n" \
     "\n" \
 
 #undef __CONFIRM_FORFEIT_STR
-#define __CONFIRM_FORFEIT_STR     "ABANDONAR?"
+#define __CONFIRM_FORFEIT_STR     "FORFEIT ROUND?"
 
 #undef __CONFIRM_STATS_RESET_STR
-#define __CONFIRM_STATS_RESET_STR "BORRAR STATS?"
+#define __CONFIRM_STATS_RESET_STR "RESET STATS?"
 
 
 // Display hard mode indicator at top of screen
@@ -131,34 +131,34 @@
 
 #undef __STR_HARD_MODE_DISPLAY
 #undef __STR_HARD_MODE_HIDE
-#define __STR_HARD_MODE_DISPLAY "DIFICIL"
-#define __STR_HARD_MODE_HIDE    "       "
+#define __STR_HARD_MODE_DISPLAY "HARD"
+#define __STR_HARD_MODE_HIDE    "    "
 
 
 #undef __MESSAGE_HARD_MODE_CANT_CHANGE_STR
 #define __MESSAGE_HARD_MODE_CANT_CHANGE_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "MODO DIFICIL: SOLO\n" \
-    "DISPONIBLE AL\n" \
-    "COMENZAR RONDA"
+    "HARD MODE: CAN\n" \
+    "ONLY CHANGE AT\n" \
+    "START OF ROUND"
 
 
 // Avoid increasing this popup height so it doesn't obscure the board
 #undef __MESSAGE_HARD_MODE_GUESS_NOT_VALID_STR
 #define __MESSAGE_HARD_MODE_GUESS_NOT_VALID_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "MODO DIFICIL:\n" \
-    "DEBES INCLUIR\n" \
-    "TODAS LAS PISTAS"
+    "HARD MODE: GUESS\n" \
+    "MUST HAVE ALL\n" \
+    "REVEALED CLUES"
 
 
 // Avoid increasing this popup height so it doesn't obscure the board
 #undef __MESSAGE_LOSE_STR
 #define __MESSAGE_LOSE_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "Pierdes!\n" \
+    "You lose. Sorry!\n" \
     "\n" \
-    "Solucion: "    // <-- Needs 5 chars left for answer word!
+    "Answer is: "    // <-- Needs 5 chars left for answer word!
 
 
 // NOTE! ^ gets replaced with guess 5 letter word num
@@ -167,59 +167,59 @@
 #undef __MESSAGE_GAME_WON_STR
 #define __MESSAGE_GAME_WON_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "GANAS!\n" \
+    "You won!\n" \
     "\n" \
-    "INTENTO ^ DE 6"
+    "On Guess ^ of 6"
 
 
 // Avoid increasing this popup height so it doesn't obscure the board
 #undef __MESSAGE_WORD_TOO_SHORT_STR
 #define __MESSAGE_WORD_TOO_SHORT_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "Demasiado corta!\n" \
+    "Word is too short!\n" \
     "\n" \
-    "5 Letras Min."
+    "Needs 5 Letters"
 
 
 // Avoid increasing this popup height so it doesn't obscure the board
 #undef __MESSAGE_WORD_NOT_IN_DICT_STR
 #define __MESSAGE_WORD_NOT_IN_DICT_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "No existe en el\n" \
+    "Word is not in\n" \
     "\n" \
-    "diccionario!"
+    "dictionary!"
 
 
 #undef __MESSAGE_STATS_RESET_STR
 #define __MESSAGE_STATS_RESET_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "STATS BORRADAS!"
+    "STATS RESET!"
 
 
 #undef __STATS_TEMPLATE_STR
 #define __STATS_TEMPLATE_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    " Jugadas ... ____^\n" \
-    " Racha ..... ____^\n" \
-    " Ganadas ... ____^\n" \
-    " Perdidas .. ____^\n" \
+    " Played  ____^\n" \
+    " Streak  ____^\n" \
+    " Wins    ____^\n" \
+    " Losses  ____^\n" \
     "\n" \
-    "Numero de Intentos\n" \
-    " Minimo  ... ____^\n" \
-    " Maximo  ... ____^\n" \
-    " Media...... ____^\n"   // <-- All "____^" get replaced by numbers
+    "Guesses to Win\n" \
+    " Least   ____^\n" \
+    " Most    ____^\n" \
+    " Average ____^\n"   // <-- All "____^" get replaced by numbers
 
 // Should be no more than 18 chars
 #undef __INTRO_PRESS_START_STR
 #undef __INTRO_PRESS_START_STR_BLANK
-#define __INTRO_PRESS_START_STR       "PULSA START"
-#define __INTRO_PRESS_START_STR_BLANK "           "
+#define __INTRO_PRESS_START_STR       "PRESS  START"
+#define __INTRO_PRESS_START_STR_BLANK "            "
 
 // X, Y controls upper-left corner coordinates
 #undef __INTRO_CREDITS_STR
 #define __INTRO_CREDITS_STR \
 /*  |--------------------| */\
-    "GRACIAS:\n" \
+    "THX TO:\n" \
     "TOXA\n" \
     "DAEO\n" \
     "ARPRUSS\n" \
