@@ -216,6 +216,8 @@
 #define __INTRO_PRESS_START_STR_BLANK "            "
 
 // X, Y controls upper-left corner coordinates
+#undef __INTRO_CREDITS_Y
+#define __INTRO_CREDITS_Y  (DEVICE_SCREEN_HEIGHT - 13u) / 2u
 #undef __INTRO_CREDITS_STR
 #define __INTRO_CREDITS_STR \
 /*  |--------------------| */\
@@ -225,6 +227,9 @@
     "ARPRUSS\n" \
     "COFFEE 'VALEN' BAT\n" \
     "STACKSMASHING\n" \
+    "URIXTURING\n" \
+    "ALVARO MARTINEZ\n" \
+    "  I MAJADO\n" \
     "\n" \
     "GBDK2020\n" \
     "EMULICIOUS\n" \

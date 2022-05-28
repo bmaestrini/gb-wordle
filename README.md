@@ -52,6 +52,9 @@ Language / UI Translation credits:
     - Dyski Kernowek Discord Group
     - Steve Harris (https://kerdle.vercel.app and https://an-wiasva.herokuapp.com)
     - Gerlyver Kernewek (https://cornishdictionary.org.uk)
+  - Catalan:
+    - [@urixturing](https://twitter.com/urixturing)
+    - [@alvaromartinezmajado](https://github.com/alvaromartinezmajado)
 
 Additional code and contributions from:
   - Daeo : Cart and box Graphics
