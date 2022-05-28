@@ -217,7 +217,7 @@
 
 // X, Y controls upper-left corner coordinates
 #undef __INTRO_CREDITS_Y
-#define __INTRO_CREDITS_Y  (DEVICE_SCREEN_HEIGHT - 13u) / 2u
+#define __INTRO_CREDITS_Y  (DEVICE_SCREEN_HEIGHT - 12u) / 2u
 #undef __INTRO_CREDITS_STR
 #define __INTRO_CREDITS_STR \
 /*  |--------------------| */\
@@ -228,8 +228,7 @@
     "COFFEE 'VALEN' BAT\n" \
     "STACKSMASHING\n" \
     "URIXTURING\n" \
-    "ALVARO MARTINEZ\n" \
-    "  I MAJADO\n" \
+    "ALVARO.CAT\n" \
     "\n" \
     "GBDK2020\n" \
     "EMULICIOUS\n" \
