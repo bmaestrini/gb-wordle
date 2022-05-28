@@ -120,7 +120,7 @@ void splash_init_maps(void) {
 
 // 31k + 1k cart release gets separate naming
 #if defined(CART_31k_1kflash)
-    // "  GBBOY WORDYL";
+    // "GB VOCABLE";
     const uint8_t splash_text[] = {
             BOARD_LETTERS_SPACE_CHAR,
             CHR_NUM('G'),
@@ -130,19 +130,18 @@ void splash_init_maps(void) {
             BOARD_LETTERS_SPACE_CHAR,
             BOARD_LETTERS_SPACE_CHAR,
             BOARD_LETTERS_SPACE_CHAR,
-            // CHR_NUM('B'),
-            // CHR_NUM('O'),
-            // CHR_NUM('Y'),
+
             BOARD_LETTERS_SPACE_CHAR,
-            CHR_NUM('W'),
+
+            CHR_NUM('V'),
             CHR_NUM('O'),
-            CHR_NUM('R'),
-            CHR_NUM('D'),
+            CHR_NUM('C'),
+            CHR_NUM('A'),
+            CHR_NUM('B'),
             BOARD_LETTERS_SPACE_CHAR,
             BOARD_LETTERS_SPACE_CHAR,
-            BOARD_LETTERS_SPACE_CHAR,
-            CHR_NUM('Y'),
-            CHR_NUM('L'),};
+            CHR_NUM('L'),
+            CHR_NUM('E'),};
 
     const uint8_t splash_text_color[] = {
         CGB_PAL_WHITE, // SPACE
@@ -153,65 +152,67 @@ void splash_init_maps(void) {
         CGB_PAL_WHITE, // SPACE
         CGB_PAL_WHITE, // SPACE
         CGB_PAL_WHITE, // SPACE
-        // CGB_PAL_GREEN, // BOY
-        // CGB_PAL_GREEN,
-        // CGB_PAL_GREEN,
+
         CGB_PAL_WHITE, // SPACE
 
-        CGB_PAL_BLUE, // WORD
+        CGB_PAL_BLUE, // VOCAB
         CGB_PAL_BLUE,
         CGB_PAL_BLUE,
         CGB_PAL_BLUE,
+        CGB_PAL_BLUE,
 
         CGB_PAL_WHITE, // SPACE
         CGB_PAL_WHITE, // SPACE
-        CGB_PAL_WHITE, // SPACE
 
-        CGB_PAL_BLUE,  // YL
+        CGB_PAL_BLUE,  // LE
         CGB_PAL_BLUE};
 
 #else
-    // "GAMEBOY WORDYL";
+    // "GAMEBOY VOCABLE";
     const uint8_t splash_text[] = {
+            BOARD_LETTERS_SPACE_CHAR,
             CHR_NUM('G'),
-            CHR_NUM('A'),
-            CHR_NUM('M'),
-            CHR_NUM('E'),
             CHR_NUM('B'),
+            BOARD_LETTERS_SPACE_CHAR,
+
+            BOARD_LETTERS_SPACE_CHAR,
+            BOARD_LETTERS_SPACE_CHAR,
+            BOARD_LETTERS_SPACE_CHAR,
+
+            BOARD_LETTERS_SPACE_CHAR,
+
+            CHR_NUM('V'),
             CHR_NUM('O'),
-            CHR_NUM('Y'),
-            BOARD_LETTERS_SPACE_CHAR,
-            CHR_NUM('W'),
-            CHR_NUM('O'),
-            CHR_NUM('R'),
-            CHR_NUM('D'),
+            CHR_NUM('C'),
+            CHR_NUM('A'),
+            CHR_NUM('B'),
             BOARD_LETTERS_SPACE_CHAR,
             BOARD_LETTERS_SPACE_CHAR,
-            BOARD_LETTERS_SPACE_CHAR,
-            CHR_NUM('Y'),
-            CHR_NUM('L'),};
+            CHR_NUM('L'),
+            CHR_NUM('E'),};
 
     const uint8_t splash_text_color[] = {
-        CGB_PAL_GREEN, // GAME
+        CGB_PAL_WHITE, // SPACE
+        CGB_PAL_GREEN, // GB
         CGB_PAL_GREEN,
-        CGB_PAL_GREEN,
-        CGB_PAL_GREEN,
-        CGB_PAL_GREEN, // BOY
-        CGB_PAL_GREEN,
-        CGB_PAL_GREEN,
+        CGB_PAL_WHITE, // SPACE
+
+        CGB_PAL_WHITE, // SPACE
+        CGB_PAL_WHITE, // SPACE
+        CGB_PAL_WHITE, // SPACE
 
         CGB_PAL_WHITE, // SPACE
 
-        CGB_PAL_BLUE, // WORD
+        CGB_PAL_BLUE, // VOCAB
         CGB_PAL_BLUE,
         CGB_PAL_BLUE,
         CGB_PAL_BLUE,
+        CGB_PAL_BLUE,
 
         CGB_PAL_WHITE, // SPACE
         CGB_PAL_WHITE, // SPACE
-        CGB_PAL_WHITE, // SPACE
 
-        CGB_PAL_BLUE,  // YL
+        CGB_PAL_BLUE,  // LE
         CGB_PAL_BLUE};
 
 #endif
