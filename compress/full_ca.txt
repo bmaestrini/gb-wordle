@@ -428,6 +428,7 @@ airau
 airem
 airen
 aires
+airet
 aireu
 airin
 airis
@@ -436,6 +437,7 @@ aital
 aixaf
 aixec
 aixes
+aixis
 aixol
 ajace
 ajaci
@@ -1327,6 +1329,7 @@ barbi
 barbo
 barbs
 barca
+barco
 barda
 bards
 barem
@@ -2148,6 +2151,7 @@ capto
 capça
 capço
 caqui
+carai
 caral
 caram
 carat
@@ -2259,6 +2263,7 @@ caçar
 caças
 caçat
 caçau
+cdrom
 cebar
 cebes
 cebid
@@ -2278,6 +2283,7 @@ cegar
 cegas
 cegat
 cegau
+cegos
 cegue
 cegui
 ceiba
@@ -2644,6 +2650,7 @@ copen
 copeo
 coper
 copes
+copet
 copeu
 copia
 copie
@@ -2824,6 +2831,7 @@ crise
 crisi
 crism
 crisp
+crist
 crits
 croat
 croca
@@ -3273,6 +3281,7 @@ dolla
 dolls
 dolor
 dolos
+dolsa
 dolça
 domam
 domar
@@ -4078,6 +4087,7 @@ faves
 favor
 faxos
 feble
+febra
 febre
 fecal
 fedai
@@ -4304,6 +4314,8 @@ fixeu
 fixin
 fixis
 fixos
+fiçar
+fiçat
 flaca
 flacs
 flair
@@ -4317,6 +4329,7 @@ flanc
 flaps
 flasc
 flats
+flaça
 fleca
 flect
 fleix
@@ -4935,6 +4948,7 @@ gosin
 gosis
 gossa
 gotes
+gotet
 gotic
 gotim
 gotos
@@ -5376,6 +5390,7 @@ isola
 isole
 isoli
 isolo
+isque
 isqui
 istme
 items
@@ -5408,6 +5423,7 @@ jaieu
 jaios
 jalon
 jamai
+janer
 janot
 jaque
 jaqui
@@ -5682,6 +5698,7 @@ llavi
 llavo
 llaça
 llaço
+lleal
 llecs
 lledo
 lleem
@@ -5786,6 +5803,7 @@ lluix
 llumi
 llums
 lluna
+llunt
 lluny
 lluor
 llurs
@@ -5805,6 +5823,7 @@ loess
 lofid
 logia
 logic
+logos
 lones
 longa
 loqui
@@ -5937,6 +5956,7 @@ manna
 manoi
 manos
 mansa
+manso
 manta
 mante
 manti
@@ -6243,6 +6263,7 @@ modes
 modic
 modis
 modol
+modos
 modul
 mofam
 mofar
@@ -6673,6 +6694,7 @@ nogut
 noiem
 noien
 noies
+noiet
 noieu
 nolis
 nolit
@@ -6718,6 +6740,7 @@ novel
 noves
 novia
 novii
+novio
 nuada
 nuant
 nuara
@@ -7264,6 +7287,7 @@ pansi
 panta
 panxa
 panxo
+panyo
 panys
 paona
 paons
@@ -7637,6 +7661,7 @@ pisco
 pisem
 pisen
 pises
+piset
 piseu
 pisin
 pisis
@@ -7931,6 +7956,7 @@ preus
 preve
 previ
 prima
+prime
 prims
 prior
 prisa
@@ -8582,6 +8608,7 @@ ritmi
 ritmo
 ritus
 riuen
+riuet
 riura
 riure
 rival
@@ -8940,6 +8967,8 @@ sauri
 saurs
 savia
 savis
+secar
+secas
 secor
 secta
 sedal
@@ -9209,6 +9238,7 @@ solem
 solen
 soler
 soles
+solet
 soleu
 solfa
 solga
@@ -9693,6 +9723,7 @@ tibia
 tibin
 tibis
 tible
+tieta
 tifes
 tific
 tifus
@@ -9728,6 +9759,7 @@ tipes
 tipic
 tipis
 tiple
+tipos
 tipus
 tiram
 tirar
@@ -9821,6 +9853,8 @@ toneu
 tonga
 tonia
 tonic
+tonta
+tonto
 tonus
 tonya
 topam
@@ -9910,6 +9944,7 @@ trais
 trait
 traiu
 traix
+trajo
 trama
 trame
 trami
@@ -10393,6 +10428,7 @@ veieu
 veina
 veins
 veire
+vejam
 velam
 velar
 velas
@@ -10591,6 +10627,7 @@ viren
 vires
 viret
 vireu
+virgo
 viric
 viril
 virin
@@ -10713,6 +10750,7 @@ vudus
 vuite
 vuits
 vulga
+vullc
 vulpi
 vults
 vulva
