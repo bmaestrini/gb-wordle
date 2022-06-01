@@ -41,12 +41,15 @@ LCCFLAGS_gbc     = # No MBC -Wl-yt0x1B -Wm-yc # Same as .gb with: -Wm-yc (gb & g
 LCCFLAGS_sms     =
 LCCFLAGS_gg      =
 
-# Handle cart specific flags
+
+### Handle cart specific flags
+
 ifeq ($(CART_TYPE),mbc5)
 	TARGETS=gb pocket
 	LCCFLAGS_gb      += -Wl-yt0x1B -Wl-ya1 # Set an MBC for banking (1B-ROM+MBC5+RAM+BATT)
 	LCCFLAGS_pocket  += -Wl-yt0x1B -Wl-ya1 # Same as for .gb
 endif
+
 # 31K+1k cart loses 1024 bytes at the end for flash storage
 ifeq ($(CART_TYPE),31k_1kflash)
 	# No reason to build .pocket for the 31K + 1k flash cart
@@ -59,6 +62,12 @@ ifeq ($(CART_TYPE),32k_nosave)
 	TARGETS=gb pocket
 	LCCFLAGS_gb      += # bare 32K
 	LCCFLAGS_pocket  += #
+endif
+
+
+# Generic 32 Cart with no save support
+ifeq ($(CART_TYPE),32k_nosave)
+	TARGETS=gb pocket
 endif
 
 
@@ -208,11 +217,13 @@ langs-clean:
 carts:
 	${MAKE} CART_TYPE=31k_1kflash langs
 	${MAKE} CART_TYPE=mbc5 langs
+	${MAKE} CART_TYPE=32k_nosave langs
 
 
 carts-clean:
 	${MAKE} CART_TYPE=31k_1kflash langs-clean
 	${MAKE} CART_TYPE=mbc5 langs-clean
+	${MAKE} CART_TYPE=32k_nosave langs-clean
 
 
 dictionaries: langs-compress

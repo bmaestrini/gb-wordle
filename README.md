@@ -24,9 +24,9 @@ Downloads and online playable version are at: https://bbbbbr.itch.io/gb-wordyl
   - Super Game Boy Border
   - All in a 32K ROM
   - Multiple language dictionaries (different ROM for each)
-    - Deutsch (DE), English (EN), Español (ES), Français (FR), Italiano (IT), Nederlands (NL), Latin (LA), Português Brasileiro (PT-BR), Cornish (KW)
+    - Deutsch (DE), English (EN), Español (ES), Français (FR), Italiano (IT), Nederlands (NL), Latin (LA), Português Brasileiro (PT-BR), Cornish (KW), català (CA)
     - No words with special chars, just English A-Z letters
-    - Translated UI text for Deutsch (DE), English (EN), Español (ES), Nederlands (NL), Português Brasileiro (PT-BR), Cornish (KW)
+    - Translated UI text for Deutsch (DE), English (EN), Español (ES), Nederlands (NL), Português Brasileiro (PT-BR), Cornish (KW), català (CA)
 
 ### Controls:
   - A: Add Letter
@@ -55,6 +55,8 @@ Language / UI Translation credits:
   - Catalan:
     - [@urixturing](https://twitter.com/urixturing)
     - [@alvaromartinezmajado](https://github.com/alvaromartinezmajado)
+    - Their web version is at: https://factorialunar.github.io/vocable/
+    - For this repo see the [lang_catalan branch](https://github.com/bbbbbr/gb-wordle/tree/feature/lang_catalan)
 
 Additional code and contributions from:
   - Daeo : Cart and box Graphics
