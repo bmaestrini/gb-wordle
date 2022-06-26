@@ -10,28 +10,28 @@
 
 // == #define overrides for language strings go here
 
-// Brazilian Portuguese: Translation by Daniel Tolentino
+// Brazilian Portuguese: Translation by Daniel Tolentino, revision by Bruno Maestrini
 
 #undef INTRO_DIALOG_WIN_Y
 #define INTRO_DIALOG_WIN_Y DIALOG_TEXT_HEIGHT_LINES(15)
 #undef __INTRO_MESSAGE_STR
 #define __INTRO_MESSAGE_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "IDIOMA ... " STR(LANG_CODE) "\n" \
-    "  A..Z  APENAS\n" \
-    "  SEM CAR. ESPEC.\n" \
+    "IDIOMA: " STR(LANG_CODE) "\n" \
+    "  APENAS PALAVRAS\n" \
+    "  SEM ACENTO\n" \
     "\n" \
     "ABRIR MENU:\n" \
     "  3 x SELECT\n" \
     "\n" \
-    "CURSOR DOS BLOCOS:\n" \
-    "  SELECT + B A\n" \
+    "MOVER CURSOR:\n" \
+    "  SELECT + B OU A\n" \
     "\n" \
-    "PREENCHER:\n" \
+    "COPIAR ACERTOS:\n" \
     "  SELECT + START\n" \
     "\n" \
-    "APERTE QUALQUER\n" \
-    "  TECLA"
+    "APERTE A PARA\n" \
+    "  JOGAR"
 
 
 // #undef HELP_LEGEND_MAP_Y
@@ -43,13 +43,13 @@
 #undef __HELP_LEGEND_DIALOG_STR
 #define __HELP_LEGEND_DIALOG_STR \
 /*  |----------------XX| Available space (16 chars wide, 2 reserved for letter legend tiles) */\
-    "TECLA DE CORES:\n" \
+    "TABELA DE CORES:\n" \
     "\n" \
-    "NO CORRESPONDER.\n" \
+    "LETRA ERRADA ...\n" \
     "\n" \
     "LUGAR ERRADO ...\n" \
     "\n" \
-    "CORRESPONDER ..."
+    "LUGAR CERTO ...."
 
 
 #undef MENU_Y_EXIT
@@ -69,19 +69,19 @@
 #undef __OPTIONS_MENU_STR
 #define __OPTIONS_MENU_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "  ... OPCOES ...\n" \
+    "  ... MENU ...\n" \
     "\n" \
-    " SAIR DO MENU\n" \
+    " FECHAR MENU\n" \
     "\n" \
-    " MODO DIFICIL .. ^\n" \
-    " AUTOPREENCHER . ^\n" \
+    " MODO PRO .. ^\n" \
+    " AUTOCOMPLETAR . ^\n" \
     " SALTAR\n" \
-    "   AUTOPREENCHER ^\n" \
-    " SONOROS ....... ^\n" \
+    "   AUTOCOMPLETAR ^\n" \
+    " SOM ........... ^\n" \
     "\n" \
-    " VER STATS\n" \
-    " SAIR\n" \
-    " APAGAR STATS\n" \
+    " VER HISTÓRICO\n" \
+    " DESISTIR PARTIDA\n" \
+    " APAGAR HISTÓRICO\n" \
     "\n" \
     " AJUDA"
 
@@ -111,15 +111,15 @@
 #define __CONFIRM_DIALOG_STR \
 /*  |------------------| Available space (18 chars wide) */ \
     "CONFIRMAR:^\n" \
-    "CANCELAR: OUTRA\n"\
-    "..................\n" \
+    "CANCELAR: \n"\
+    "QUALQUER OUTRA\n" \
     "\n" \
 
 #undef __CONFIRM_FORFEIT_STR
-#define __CONFIRM_FORFEIT_STR     "SAIR?"
+#define __CONFIRM_FORFEIT_STR     "DESISTE?"
 
 #undef __CONFIRM_STATS_RESET_STR
-#define __CONFIRM_STATS_RESET_STR "APAGAR STATS?"
+#define __CONFIRM_STATS_RESET_STR "APAGAR HISTÓRICO?"
 
 
 // Display hard mode indicator at top of screen
@@ -130,14 +130,14 @@
 
 #undef __STR_HARD_MODE_DISPLAY
 #undef __STR_HARD_MODE_HIDE
-#define __STR_HARD_MODE_DISPLAY "DIFICIL"
+#define __STR_HARD_MODE_DISPLAY "PRO"
 #define __STR_HARD_MODE_HIDE    "       "
 
 
 #undef __MESSAGE_HARD_MODE_CANT_CHANGE_STR
 #define __MESSAGE_HARD_MODE_CANT_CHANGE_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "MODO DIFICIL: SOLO\n" \
+    "MODO PRO: SOLO\n" \
     "MUDA APENAS EM\n" \
     "NOVA RODADA"
 
@@ -146,9 +146,9 @@
 #undef __MESSAGE_HARD_MODE_GUESS_NOT_VALID_STR
 #define __MESSAGE_HARD_MODE_GUESS_NOT_VALID_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "MODO DIFICIL:\n" \
+    "MODO PRO:\n" \
     "DEVE INCLUIR\n" \
-    "DICAS REVELADAS"
+    "LETRAS ACERTADAS"
 
 
 // Avoid increasing this popup height so it doesn't obscure the board
@@ -166,7 +166,7 @@
 #undef __MESSAGE_GAME_WON_STR
 #define __MESSAGE_GAME_WON_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "Ganhou!\n" \
+    "Acertou!\n" \
     "\n" \
     "Tentativa ^ DE 6"
 
@@ -175,38 +175,38 @@
 #undef __MESSAGE_WORD_TOO_SHORT_STR
 #define __MESSAGE_WORD_TOO_SHORT_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "Termo muito curto!\n" \
+    "Apenas palavras\n" \
     "\n" \
-    "Min. de 5 Letras"
+    "de 5 Letras"
 
 
 // Avoid increasing this popup height so it doesn't obscure the board
 #undef __MESSAGE_WORD_NOT_IN_DICT_STR
 #define __MESSAGE_WORD_NOT_IN_DICT_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "Palava nao esta no\n" \
+    "Palavra\n" \
     "\n" \
-    "dicionario!"
+    "desconhecida!"
 
 
 #undef __MESSAGE_STATS_RESET_STR
 #define __MESSAGE_STATS_RESET_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    "STATS APAGADOS!"
+    "HISTÓRICO APAGADO!"
 
 
 #undef __STATS_TEMPLATE_STR
 #define __STATS_TEMPLATE_STR \
 /*  |------------------| Available space (18 chars wide) */\
-    " Jogadas ... ____^\n" \
-    " Seguida ... ____^\n" \
-    " Vitoria ... ____^\n" \
-    " Perdidas .. ____^\n" \
+    " Jogos ..... ____^\n" \
+    " Invictos .. ____^\n" \
+    " Acertos ... ____^\n" \
+    " Erros ..... ____^\n" \
     "\n" \
-    "Numero de Jogadas\n" \
-    " Minimo  ... ____^\n" \
-    " Maximo  ... ____^\n" \
-    " Media...... ____^\n"   // <-- All "____^" get replaced by numbers
+    "Tentativas\n" \
+    " Menor # ... ____^\n" \
+    " Maior # ... ____^\n" \
+    " Média...... ____^\n"   // <-- All "____^" get replaced by numbers
 
 // Should be no more than 18 chars
 #undef __INTRO_PRESS_START_STR
@@ -219,7 +219,7 @@
 #undef __INTRO_CREDITS_STR
 #define __INTRO_CREDITS_STR \
 /*  |--------------------| */\
-    "OBRIGADO a:\n" \
+    "AGRADECIMENTOS:\n" \
     "TOXA\n" \
     "DAEO\n" \
     "ARPRUSS\n" \
